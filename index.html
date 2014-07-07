@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/sierra-compiler">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/sierra-lang">View on GitHub</a>
 
           <h1 id="project_title">Sierra</h1>
           <h2 id="project_tagline">A SIMD Extension for C++</h2>
@@ -33,11 +33,55 @@
     Nonetheless, many software projects make hardly use of SIMD instructions:
     Applications are usually written in general-purpose languages like C++.
     However, general-purpose languages only provide poor abstractions for SIMD programming enforcing an error-prone, assembly-like programming style.
+</p>
 
+<p>
     Sierra combines the full power of C++ with an intuitive and effective way to address SIMD hardware.
     With Sierra, the programmer can write efficient, portable and maintainable code.
     It is particularly easy to enhance existing code to run efficiently on SIMD machines.
 </p>
+
+<div id="building" class="target">
+<h2>Building</h2>
+<p>
+    In order to build Sierra, we first fetch the official LLVM sources and then Sierra - which acts as drop-in replacement for clang.
+    Additionally, we clone libsierra for supporting headers.
+    We build everything with CMake.
+    For a debug build we do the following:
+<pre><code>mkdir sierra
+cd sierra
+mkdir build_debug
+mkdir install_debug
+git clone git@github.com:sierra-lang/libsierra.git
+wget http://llvm.org/releases/3.4.2/cfe-3.4.2.src.tar.gz
+tar xzf cfe-3.4.2.src.tar.gz
+cd llvm/tools
+git clone git@github.com:sierra-lang/sierra.git sierra
+cd ../../build_debug
+cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_debug/
+make
+make install</code></pre>
+</div>
+</p>
+
+<p>
+    Alternatively, you can use the cmake-gui tool:
+    <code>cmake-gui ../llvm</code>
+Then,
+<ul>
+    <li>press "configure"</li>
+    <li>set <code>CMAKE_INSTALL_PREFIX</code> to <code>/path/to/sierra/install_debug</code></li>
+    <li>set <code>CMAKE_BUILD_TYPE</code> to <code>Debug</code></li>
+    <li>set <code>BUILD_SHARED_LIBS</code> and</li>
+    <li>press "generate".</li>
+</ul>
+</p>
+
+<p>
+    For a release build we do the following:
+</p>
+
+TODO
 
 <div id="publications" class="target">
     <h3>Publications</h3>
@@ -53,33 +97,32 @@
     </p>
 </div>
 
+<h2>Troubleshooting</h2>
 
-<!--<pre><code>$ cd your_repo_root/repo_name-->
-<!--$ git fetch origin-->
-<!--$ git checkout gh-pages-->
-<!--</code></pre>-->
+<h3>Python 2</h3>
 
-<!--<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>-->
+<p>
+    LLVM's build scripts make use of python. 
+    Apparently, python version 3 causes problems. 
+    Thus, you have to stick to python 2. 
+    If you don't want to mess around with your distribution too much, do something like this:
 
-<!--<h3>-->
-<!--<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>-->
+<pre><code>cd ~
+mkdir bin
+ln -s /usr/bin/python2 ~/bin/python
+export PATH=~/bin:$PATH</code></pre>
 
-<!--<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>-->
+    You can confirm with <code>pyhton --version</code> that python actually points to version 2.
+    Eventually, you may want to put <code>export PATH=~/bin:$PATH</code> into your <code>~/.bashrc</code>.
 
-<!--<h3>-->
-<!--<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>-->
+<h3>Debugging clang</h3>
 
-<!--<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>-->
-
-<!--<h3>-->
-<!--<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>-->
-
-<!--<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>-->
-
-<!--<h3>-->
-<!--<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>-->
-
-<!--<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>-->
+<p>
+    Invoke <code>clang</code> with the <code>-cc1</code> switch in order to actually catch breakpoints. 
+    This will just invoke the pure front end - no code generation. 
+    Add <code>-emit-llvm</code> or <code>-emit-obj</code> to peek into later stages. 
+    Use the <code>-v</code> switch to see full command-line arguments and paste them into your gdb-run command.
+</p>
 
       </div>
     </div>
