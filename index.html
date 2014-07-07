@@ -41,6 +41,11 @@
     It is particularly easy to enhance existing code to run efficiently on SIMD machines.
 </p>
 
+<h2>Overview</h2>
+<p>
+    TODO
+</p>
+
 <h2>Building</h2>
 <p>
     In order to build Sierra, we first fetch the official LLVM sources and then Sierra - which acts as drop-in replacement for clang.
@@ -123,6 +128,125 @@ export PATH=~/bin:$PATH</code></pre>
     Add <code>-emit-llvm</code> or <code>-emit-obj</code> to peek into later stages. 
     Use the <code>-v</code> switch to see full command-line arguments and paste them into your gdb-run command.
 </p>
+
+<h2>Status</h2>
+
+<h3>Supported Control-Flow Construts</h3>
+<p>
+    The following constructs are currently supported in a <em>vectorial</em> context.
+    The still work as normal in <em>scalar</em> context.
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th align="center">Supported?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>if ... else</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>while</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>do ... while</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>for</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>break</code></td>
+            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>continue</code></td>
+            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>return</code></td>
+            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>switch</code></td>
+            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>case</code></td>
+            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>goto</code></td>
+            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>expr || expr</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>expr && expr</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>!expr</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>expr ? expr : expr</code></td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Type System</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th align="center">Supported?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>varying</code> primitive types</td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td>pointers and references to <code>varying</code> types</td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>varying</code> pointers and references</td>
+            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+        </tr>
+        <tr>
+            <td><code>varying</code> structures</td>
+            <td align="center">some initial support is there</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Known issues</h3>
+
+<ul>
+    <li>
+        The semantic analysis which checks whether vector lengths match is currently disabled. 
+        There are problems with template instantiation.
+        Mixing vector lengths in an illegal way causes crashes.
+    </li>
+    <li>
+        In some circumstances <code>expr ? expr : expr</code> causes crashes.
+    </li>
+    <li>
+        The attribute <code>spmd(L)</code> cannot depend on a template parameter <code>L</code>.
+    </li>
+</ul>
 
 <h2>Publications</h2>
 <p>
