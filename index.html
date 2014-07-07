@@ -47,6 +47,11 @@
     In order to build Sierra, we first fetch the official LLVM sources and then Sierra - which acts as drop-in replacement for clang.
     Additionally, we clone libsierra for supporting headers.
     We build everything with CMake.
+</p>
+
+<div id="debug_build" class="target">
+<h3>Debug Build</h3>
+</p>
     For a debug build we do the following:
 <pre><code>mkdir sierra
 cd sierra
@@ -77,25 +82,14 @@ Then,
 </ul>
 </p>
 
+<div id="release_build" class="target">
+<h3>Release Build</h3>
+</p>
 <p>
     For a release build we do the following:
 </p>
 
 TODO
-
-<div id="publications" class="target">
-    <h3>Publications</h3>
-    <p>
-    <em>Roland Leißa, Immanuel Haffner, and Sebastian Hack</em><br />
-    <strong><a href="http://www.cdl.uni-saarland.de/papers/lhh14.pdf">Sierra: A SIMD Extension for C++.</a></strong><br />
-    In Proceedings of Proceedings of the Workshop on Programming models for SIMD/Vector processing (WPMVP), 2014.
-    </p>
-    <p>
-    <em>Roland Leißa, Ingo Wald, and Sebastian Hack</em><br />
-    <strong><a href="http://www.cdl.uni-saarland.de/papers/leissa_vecimp.pdf">Extending a C-like Language for Portable SIMD Programming.</a></strong><br />
-    In Proceedings of the Conference on Principles and Practice of Parallel Programming (PPoPP), 2012.
-    </p>
-</div>
 
 <h2>Troubleshooting</h2>
 
@@ -123,6 +117,20 @@ export PATH=~/bin:$PATH</code></pre>
     Add <code>-emit-llvm</code> or <code>-emit-obj</code> to peek into later stages. 
     Use the <code>-v</code> switch to see full command-line arguments and paste them into your gdb-run command.
 </p>
+
+<div id="publications" class="target">
+    <h3>Publications</h3>
+    <p>
+    <em>Roland Leißa, Immanuel Haffner, and Sebastian Hack</em><br />
+    <strong><a href="http://www.cdl.uni-saarland.de/papers/lhh14.pdf">Sierra: A SIMD Extension for C++.</a></strong><br />
+    In Proceedings of Proceedings of the Workshop on Programming models for SIMD/Vector processing (WPMVP), 2014.
+    </p>
+    <p>
+    <em>Roland Leißa, Ingo Wald, and Sebastian Hack</em><br />
+    <strong><a href="http://www.cdl.uni-saarland.de/papers/leissa_vecimp.pdf">Extending a C-like Language for Portable SIMD Programming.</a></strong><br />
+    In Proceedings of the Conference on Principles and Practice of Parallel Programming (PPoPP), 2012.
+    </p>
+</div>
 
       </div>
     </div>
