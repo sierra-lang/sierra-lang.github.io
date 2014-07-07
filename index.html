@@ -51,6 +51,7 @@
 <h3>Debug Build</h3>
 <p>
     For a <em>debug</em> build we do the following:
+</p>
 <pre><code>mkdir sierra
 cd sierra
 mkdir build_debug
@@ -65,7 +66,6 @@ cd ../../build_debug
 cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_debug/
 make
 make install</code></pre>
-</p>
 
 <p>
     Alternatively, you can use the cmake-gui tool:
@@ -83,6 +83,7 @@ make install</code></pre>
 <h3>Release Build</h3>
 <p>
     For a <em>release</em> build we do the following:
+</p>
 <pre><code>mkdir sierra
 cd sierra
 mkdir build_release
@@ -97,26 +98,23 @@ cd ../../build_release
 cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_release/
 make
 make install</code></pre>
-</p>
 
 <h2>Troubleshooting</h2>
 
 <h3>Python 2</h3>
-
 <p>
     LLVM's build scripts make use of python. 
     Apparently, python version 3 causes problems. 
     Thus, you have to stick to python 2. 
     If you don't want to mess around with your distribution too much, do something like this:
-
+</p>
 <pre><code>cd ~
 mkdir bin
 ln -s /usr/bin/python2 ~/bin/python
 export PATH=~/bin:$PATH</code></pre>
-
+<p>
     You can confirm with <code>pyhton --version</code> that python actually points to version 2.
     Eventually, you may want to put <code>export PATH=~/bin:$PATH</code> into your <code>~/.bashrc</code>.
-
 </p>
 
 <h3>Debugging clang</h3>
