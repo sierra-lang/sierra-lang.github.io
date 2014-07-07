@@ -49,8 +49,8 @@
 </p>
 
 <h3>Debug Build</h3>
-</p>
-    For a debug build we do the following:
+<p>
+    For a <em>debug</em> build we do the following:
 <pre><code>mkdir sierra
 cd sierra
 mkdir build_debug
@@ -70,23 +70,34 @@ make install</code></pre>
 <p>
     Alternatively, you can use the cmake-gui tool:
     <code>cmake-gui ../llvm</code>
-Then,
-<ul>
-    <li>press "configure"</li>
-    <li>set <code>CMAKE_INSTALL_PREFIX</code> to <code>/path/to/sierra/install_debug</code></li>
-    <li>set <code>CMAKE_BUILD_TYPE</code> to <code>Debug</code></li>
-    <li>set <code>BUILD_SHARED_LIBS</code> and</li>
-    <li>press "generate".</li>
-</ul>
+    Then,
+    <ul>
+        <li>press <code>configure</code></li>
+        <li>set <code>CMAKE_INSTALL_PREFIX</code> to <code>/path/to/sierra/install_debug</code></li>
+        <li>set <code>CMAKE_BUILD_TYPE</code> to <code>Debug</code></li>
+        <li>set <code>BUILD_SHARED_LIBS</code> and</li>
+        <li>press <code>generate</code>.</li>
+    </ul>
 </p>
 
 <h3>Release Build</h3>
-</p>
 <p>
-    For a release build we do the following:
+    For a <em>release</em> build we do the following:
+<pre><code>mkdir sierra
+cd sierra
+mkdir build_release
+mkdir install_release
+git clone git@github.com:sierra-lang/libsierra.git
+wget http://llvm.org/releases/3.4.2/llvm-3.4.2.src.tar.gz
+tar xzfv llvm-3.4.2.src.tar.gz
+mv llvm-3.4.2.src llvm
+cd llvm/tools
+git clone git@github.com:sierra-lang/sierra.git clang
+cd ../../build_release
+cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_release/
+make
+make install</code></pre>
 </p>
-
-TODO
 
 <h2>Troubleshooting</h2>
 
