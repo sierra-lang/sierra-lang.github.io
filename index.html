@@ -16,14 +16,21 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/sierra-lang">View on GitHub</a>
+            <a id="forkme_banner" href="https://github.com/sierra-lang">View on GitHub</a>
 
-          <h1 id="project_title">Sierra</h1>
-          <h2 id="project_tagline">A SIMD Extension for C++</h2>
+            <h1 id="project_title">Sierra</h1>
+            <h2 id="project_tagline">A SIMD Extension for C++</h2>
+
+            <div id="menu">
+                <a class="nav_link" href="#overview">Overview</a>
+                <a class="nav_link" href="#building">Building</a>
+                <a class="nav_link" href="#status">Status</a>
+                <a class="nav_link" href="#publications">Publications</a>
+            </div>
 
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/sierra-lang/sierra/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/sierra-lang/sierra/tarball/master">Download this project as a tar.gz file</a>
+                <a class="zip_download_link" href="https://github.com/sierra-lang/sierra/zipball/master">Download this project as a .zip file</a>
+                <a class="tar_download_link" href="https://github.com/sierra-lang/sierra/tarball/master">Download this project as a tar.gz file</a>
             </section>
         </header>
     </div>
@@ -45,11 +52,13 @@
     It is particularly easy to enhance existing code to run efficiently on SIMD machines.
 </p>
 
+<p><a name="overview"></a></p>
 <h2>Overview</h2>
 <p>
     TODO
 </p>
 
+<p><a name="building"></a></p>
 <h2>Building</h2>
 <p>
     In order to build Sierra, we first fetch the official LLVM sources and then Sierra - which acts as drop-in replacement for clang.
@@ -107,9 +116,9 @@ cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_P
 make
 make install</code></pre>
 
-<h2>Troubleshooting</h2>
+<h3>Troubleshooting</h3>
 
-<h3>Python 2</h3>
+<h4>Python 2</h4>
 <p>
     LLVM's build scripts make use of python. 
     Apparently, python version 3 causes problems. 
@@ -125,7 +134,7 @@ export PATH=~/bin:$PATH</code></pre>
     Eventually, you may want to put <code>export PATH=~/bin:$PATH</code> into your <code>~/.bashrc</code>.
 </p>
 
-<h3>Debugging clang</h3>
+<h4>Debugging clang</h4>
 <p>
     Invoke <code>clang</code> with the <code>-cc1</code> switch in order to actually catch breakpoints. 
     This will just invoke the pure front end - no code generation. 
@@ -133,6 +142,7 @@ export PATH=~/bin:$PATH</code></pre>
     Use the <code>-v</code> switch to see full command-line arguments and paste them into your gdb-run command.
 </p>
 
+<p><a name="status"></a></p>
 <h2>Status</h2>
 
 <h3>Supported Control-Flow Construts</h3>
@@ -252,6 +262,7 @@ export PATH=~/bin:$PATH</code></pre>
     </li>
 </ul>
 
+<p><a name="publications"></a></p>
 <h2>Publications</h2>
 <p>
     <em>Roland Leißa, Immanuel Haffner, and Sebastian Hack</em><br />
