@@ -120,6 +120,25 @@ cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_P
 make
 make install</code></pre>
 
+                <h3>Trying it out</h3>
+                <p>
+                    You can try out the examples in <code>libsierra/benchmarks</code>.
+                    For example, check out the mandelbrot example:
+                </p>
+<pre><code>cd libsierra/benchmarks/mandelbrot
+clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGTH=1 # compile scalar version
+./a.out 11                                                                          # benchmark median of 11 runs
+clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGTH=8 # compile vectorized version
+./a.out 11                                                                          # benchmark median of 11 runs</code></pre>
+                <p>
+                    For the aobench do the following:
+                </p>
+<pre><code>cd libsierra/benchmarks/aobench
+clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx aobench.cpp -I../.. -DLENGTH=1 # compile scalar version
+./a.out 11                                                                       # benchmark median of 11 runs
+clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx aobench.cpp -I../.. -DLENGTH=8 # compile vectorized version
+./a.out 11                                                                       # benchmark median of 11 runs</code></pre>
+
                 <h3>Troubleshooting</h3>
 
                 <h4>Python 2</h4>
