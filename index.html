@@ -144,9 +144,9 @@ clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGT
                 </p>
 <pre><code>cd libsierra/benchmark/aobench
 clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx aobench.cpp -I../.. -DLENGTH=1 # compile scalar version
-./a.out 11                                                                       # benchmark median of 11 runs
+./a.out 256 256 11                                                               # benchmark median of 11 runs
 clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx aobench.cpp -I../.. -DLENGTH=8 # compile vectorized version
-./a.out 11                                                                       # benchmark median of 11 runs</code></pre>
+./a.out 256 256 11                                                               # benchmark median of 11 runs</code></pre>
 
                 <h3>Troubleshooting</h3>
 
