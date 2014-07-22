@@ -123,7 +123,15 @@ make install</code></pre>
                 <h3>Trying it out</h3>
                 <p>
                     You can try out the examples in <code>libsierra/benchmark</code>.
-                    In the following we assume you have AVX avaiable.
+                    Pleake make sure that <code>clang++</code> points to your sierra build.
+                    Otherwise the switch <code>-fsierra</code> which turns on the sierra extension won't be available.
+                    Additionally, we assume that you have AVX avialable.
+                    If you just have SSE, use <code>-msseX</code> to select your SSE version.
+                    For instance, if you have SSE 4.2, use <code>-msse4.2</code>.
+                    Moreover, you want to use a smaller vectorization length.
+                    For the vectorized versions build with <code>-DLENGTH=4</code> instead of <code>-DLENGTH=8</code>.
+                </p>
+                <p>
                     For the mandelbrot benchmark, do the following:
                 </p>
 <pre><code>cd libsierra/benchmark/mandelbrot
