@@ -124,7 +124,7 @@ make install</code></pre>
                 <p>
                     You can try out the examples in <code>libsierra/benchmark</code>.
                     Pleake make sure that <code>clang++</code> points to your sierra build.
-                    Otherwise the switch <code>-fsierra</code> which turns on the sierra extension won't be available.
+                    Otherwise the switch <code>-fsierra</code>, which turns on the sierra extension, won't be available.
                     Additionally, we assume that you have AVX avialable.
                     If you just have SSE, use <code>-msseX</code> instead of <code>-mavx</code> to select your SSE version.
                     For instance, if you have SSE 4.2, use <code>-msse4.2</code>.
@@ -132,7 +132,7 @@ make install</code></pre>
                     For the vectorized versions build with <code>-DLENGTH=4</code> instead of <code>-DLENGTH=8</code>.
                 </p>
                 <p>
-                    For the mandelbrot benchmark, do the following:
+                    To try out <code>mandelbrot</code> do the following:
                 </p>
 <pre><code>cd libsierra/benchmark/mandelbrot
 clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGTH=1 # compile scalar version
@@ -140,7 +140,7 @@ clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGT
 clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGTH=8 # compile vectorized version
 ./a.out 11                                                                          # benchmark median of 11 runs</code></pre>
                 <p>
-                    For the aobench do the following:
+                    To try out <code>aobench</code> do the following:
                 </p>
 <pre><code>cd libsierra/benchmark/aobench
 clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx aobench.cpp -I../.. -DLENGTH=1 # compile scalar version
