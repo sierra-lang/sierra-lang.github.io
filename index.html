@@ -277,6 +277,11 @@ export PATH=~/bin:$PATH</code></pre>
                     <li>
                         The attribute <code>spmd(L)</code> cannot depend on a template parameter <code>L</code>.
                     </li>
+                    <li>
+                        Sometimes code generated with <code>-O0</code> is incorrect.
+                        This is an LLVM bug.
+                        Building with <code>-O2</code> fixes this issue.
+                    </li>
                 </ul>
 
                 <h2 id="publications">Publications</h2>
