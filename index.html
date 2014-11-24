@@ -120,32 +120,6 @@ make install</code></pre>
                     We are working on that.
                 </p>
 
-                <h3>Troubleshooting</h3>
-
-                <h4>Python 2</h4>
-                <p>
-                    LLVM's build scripts make use of python. 
-                    Apparently, python version 3 causes problems. 
-                    Thus, you have to stick to python 2. 
-                    If you don't want to mess around with your distribution too much, do something like this:
-                </p>
-<pre><code>cd ~
-mkdir bin
-ln -s /usr/bin/python2 ~/bin/python
-export PATH=~/bin:$PATH</code></pre>
-                <p>
-                    You can confirm with <code>pyhton --version</code> that python actually points to version 2.
-                    Eventually, you may want to put <code>export PATH=~/bin:$PATH</code> into your <code>~/.bashrc</code>.
-                </p>
-
-                <h4>Debugging clang</h4>
-                <p>
-                    Invoke <code>clang</code> with the <code>-cc1</code> switch in order to actually catch breakpoints. 
-                    This will just invoke the pure front end - no code generation. 
-                    Add <code>-emit-llvm</code> or <code>-emit-obj</code> to peek into later stages. 
-                    Use the <code>-v</code> switch to see full command-line arguments and paste them into your gdb-run command.
-                </p>
-
                 <h2 id="status">Status</h2>
 
                 <h3>Supported Control-Flow Constructs</h3>
