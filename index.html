@@ -29,7 +29,7 @@
             <div id="main_content" class="inner">
                 <p>
                     Nowadays, SIMD hardware is omnipresent in computers.
-                    Nonetheless, many software projects make hardly use of SIMD instructions:
+                    Nonetheless, many software projects hardly make use of SIMD instructions:
                     Applications are usually written in general-purpose languages like C++.
                     However, general-purpose languages only provide poor abstractions for SIMD programming enforcing an error-prone, assembly-like programming style.
                 </p>
@@ -79,9 +79,9 @@ cd sierra
 mkdir build_debug
 mkdir install_debug
 git clone https://github.com/sierra-lang/libsierra.git
-wget http://llvm.org/releases/3.4.2/llvm-3.4.2.src.tar.gz
-tar xzfv llvm-3.4.2.src.tar.gz
-mv llvm-3.4.2.src llvm
+wget http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
+tar xf llvm-3.5.0.src.tar.xz
+mv llvm-3.5.0.src llvm
 cd llvm/tools
 git clone https://github.com/sierra-lang/sierra.git clang
 cd ../../build_debug
@@ -109,31 +109,15 @@ make install</code></pre>
 
                 <h3>Trying it out</h3>
                 <p>
-                    You can try out the examples in <code>libsierra/benchmark</code>.
-                    Pleake make sure that <code>clang++</code> points to your sierra build.
+                    You can try out the examples in <code>libsierra/benchmark</code> with the provided <code>Makefile</code>.
+                    Please make sure that <code>clang++</code> points to your sierra build.
                     Otherwise the switch <code>-fsierra</code>, which turns on the sierra extension, won't be available.
-                    Additionally, we assume that you have AVX avialable.
-                    If you just have SSE, use <code>-msseX</code> instead of <code>-mavx</code> to select your SSE version.
-                    For instance, if you have SSE 4.2, use <code>-msse4.2</code>.
-                    Moreover, you want to use a smaller vectorization length.
-                    For the vectorized versions build with <code>-DLENGTH=4</code> instead of <code>-DLENGTH=8</code>.
                 </p>
                 <p>
-                    To try out <code>mandelbrot</code> do the following:
+                    <em>Attention:</em> Our new algorithm for vectorization of short-circuit evaluation sometimes generates ill-formed LLVM code.
+                    This breaks some of the examples.
+                    We are working on that.
                 </p>
-<pre><code>cd libsierra/benchmark/mandelbrot
-clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGTH=1 # compile scalar version
-./a.out 11                                                                          # benchmark median of 11 runs
-clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx mandelbrot.cpp -I../.. -DLENGTH=8 # compile vectorized version
-./a.out 11                                                                          # benchmark median of 11 runs</code></pre>
-                <p>
-                    To try out <code>aobench</code> do the following:
-                </p>
-<pre><code>cd libsierra/benchmark/aobench
-clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx aobench.cpp -I../.. -DLENGTH=1 # compile scalar version
-./a.out 256 256 11                                                               # benchmark median of 11 runs
-clang++ -std=c++11 -fsierra -O2 -ffast-math -mavx aobench.cpp -I../.. -DLENGTH=8 # compile vectorized version
-./a.out 256 256 11                                                               # benchmark median of 11 runs</code></pre>
 
                 <h3>Troubleshooting</h3>
 
@@ -194,15 +178,15 @@ export PATH=~/bin:$PATH</code></pre>
                         </tr>
                         <tr>
                             <td><code>break</code></td>
-                            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+                            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
                         </tr>
                         <tr>
                             <td><code>continue</code></td>
-                            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+                            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
                         </tr>
                         <tr>
                             <td><code>return</code></td>
-                            <td align="center"><a href="images/no.png" target="_blank"><img src="images/no.png" alt="check" title="No" style="max-width:100%;"></a></td>
+                            <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
                         </tr>
                         <tr>
                             <td><code>switch</code></td>
@@ -273,10 +257,17 @@ export PATH=~/bin:$PATH</code></pre>
                         Mixing vector lengths in an illegal way causes crashes.
                     </li>
                     <li>
-                        In some circumstances <code>expr ? expr : expr</code> causes crashes.
+                        Our new algorithm for vectorization of short-circuit evaluation sometimes generates ill-formed LLVM code.
+                        This breaks some of the examples.
+                        We are working on that.
                     </li>
                     <li>
                         The attribute <code>spmd(L)</code> cannot depend on a template parameter <code>L</code>.
+                    </li>
+                    <li>
+                        Sometimes code generated with <code>-O0</code> is incorrect.
+                        This is an LLVM bug.
+                        Building with <code>-O2</code> fixes this issue.
                     </li>
                 </ul>
 
