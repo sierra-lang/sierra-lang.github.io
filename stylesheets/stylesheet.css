@@ -326,7 +326,7 @@ Full-Width Styles
   color: #fff;
   display: block;
   float: left;
-  width: 90px;
+  /*width: 90px;*/
   height:70px;
   margin-left: 10px;
   overflow: hidden;
