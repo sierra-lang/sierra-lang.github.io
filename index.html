@@ -69,9 +69,10 @@
                     We build everything with CMake.
                 </p>
 
-                <h3>Debug Build</h3>
+                <h3>Build Instructions</h3>
+                <h4>Debug Build</h4>
                 <p>
-                    For a <em>debug</em> build we do the following:
+                    For a <em>debug</em> build, we do the following:
                 </p>
 <pre><code>mkdir sierra
 cd sierra
@@ -100,25 +101,11 @@ make install</code></pre>
                     <li>press <code>generate</code>.</li>
                 </ul>
 
-                <h3>Release Build</h3>
+                <h4>Release Build</h4>
 
                 <p>
-                    For a <em>release</em> build we do the following:
+                For a <em>release</em> build, setup appropriate <code>build_release</code> and <code>install_release</code> directories, and set <code>CMAKE_BUILD_TYPE=Release</code>.
                 </p>
-<pre><code>mkdir sierra
-cd sierra
-mkdir build_release
-mkdir install_release
-git clone https://github.com/sierra-lang/libsierra.git
-wget http://llvm.org/releases/3.4.2/llvm-3.4.2.src.tar.gz
-tar xzfv llvm-3.4.2.src.tar.gz
-mv llvm-3.4.2.src llvm
-cd llvm/tools
-git clone https://github.com/sierra-lang/sierra.git clang
-cd ../../build_release
-cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_release/
-make
-make install</code></pre>
 
                 <h3>Trying it out</h3>
                 <p>
