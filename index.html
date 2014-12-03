@@ -52,7 +52,7 @@
                 </p>
                 <p>
                     Most importantly, the programmer can explicitly trigger vectorization of code by using vectors in control-flow-dependent expressions.
-                    In the figure below, the condition <code>v < 3</code> is of vector type.
+                    In the figure below, the condition <code>v &lt; 3</code> is of vector type.
                     Thus, Sierra enters a special <em>SIMD mode</em>.
                     As the condition only holds for the first and fourth element, <code>v += 2</code> is only performed for the first and fourth element of <code>v</code>.
                     We also say, the first and the fourth <em>lanes</em> are <em>active</em>.
