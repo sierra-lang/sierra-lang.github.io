@@ -74,6 +74,7 @@
                     For a <em>debug</em> build we do the following:
                 </p>
 <pre><code>mkdir sierra
+export CUR=`pwd`
 cd sierra
 mkdir build_debug
 mkdir install_debug
@@ -84,10 +85,8 @@ mv llvm-3.5.0.src llvm
 cd llvm/tools
 git clone https://github.com/sierra-lang/sierra.git clang
 cd ../../build_debug
-cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_debug/
-make
-make install</code></pre>
-
+cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=${CUR}/sierra/install_debug/
+make install -j4 # use appropriate number of threads here</code></pre>
                 <p>
                     Alternatively, you can use the cmake-gui tool: <code>cmake-gui ../llvm</code>
                     Then,
