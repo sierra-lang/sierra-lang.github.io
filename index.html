@@ -115,11 +115,6 @@ make install</code></pre>
                     Otherwise the switch <code>-fsierra</code>, which turns on the sierra extension, won't be available.
                 </p>
                 <p>
-                    <em>Attention:</em> Our new algorithm for vectorization of short-circuit evaluation sometimes generates ill-formed LLVM code.
-                    This breaks some of the examples.
-                    We are working on that.
-                </p>
-                <p>
                     You may also want to checkout our <a href=https://github.com/sierra-lang/sierra/wiki>wiki</a>.
                 </p>
                 <h2 id="status">Status</h2>
@@ -232,11 +227,6 @@ make install</code></pre>
                         The semantic analysis which checks whether vector lengths match is currently disabled. 
                         There are problems with template instantiation.
                         Mixing vector lengths in an illegal way causes crashes.
-                    </li>
-                    <li>
-                        Our new algorithm for vectorization of short-circuit evaluation sometimes generates ill-formed LLVM code.
-                        This breaks some of the examples.
-                        We are working on that.
                     </li>
                     <li>
                         The attribute <code>spmd(L)</code> cannot depend on a template parameter <code>L</code>.
