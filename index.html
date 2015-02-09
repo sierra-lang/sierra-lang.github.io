@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset='utf-8'/>
-        <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Sierra: A SIMD Extension for C++"/>
         <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
         <title>Sierra</title>
@@ -18,6 +18,7 @@
                     <a class="nav_link" href="#building">Building</a>
                     <a class="nav_link" href="#status">Status</a>
                     <a class="nav_link" href="#publications">Publications</a>
+                    <a class="nav_link" href="https://github.com/sierra-lang/sierra/wiki">Wiki</a>
                 </div>
                 <section id="downloads">
                     <a class="zip_download_link" href="https://github.com/sierra-lang/sierra/zipball/master">Download this project as a .zip file</a>
@@ -51,7 +52,7 @@
                 </p>
                 <p>
                     Most importantly, the programmer can explicitly trigger vectorization of code by using vectors in control-flow-dependent expressions.
-                    In the figure below, the condition <code>v < 3</code> is of vector type.
+                    In the figure below, the condition <code>v &lt; 3</code> is of vector type.
                     Thus, Sierra enters a special <em>SIMD mode</em>.
                     As the condition only holds for the first and fourth element, <code>v += 2</code> is only performed for the first and fourth element of <code>v</code>.
                     We also say, the first and the fourth <em>lanes</em> are <em>active</em>.
@@ -69,9 +70,10 @@
                     We build everything with CMake.
                 </p>
 
-                <h3>Debug Build</h3>
+                <h3>Build Instructions</h3>
+                <h4>Debug Build</h4>
                 <p>
-                    For a <em>debug</em> build we do the following:
+                    For a <em>debug</em> build, we do the following:
                 </p>
 <pre><code>mkdir sierra
 export CUR=`pwd`
@@ -99,25 +101,11 @@ make install -j4 # use appropriate number of threads here</code></pre>
                     <li>press <code>generate</code>.</li>
                 </ul>
 
-                <h3>Release Build</h3>
+                <h4>Release Build</h4>
 
                 <p>
-                    For a <em>release</em> build we do the following:
+                For a <em>release</em> build, setup appropriate <code>build_release</code> and <code>install_release</code> directories, and set <code>CMAKE_BUILD_TYPE=Release</code>.
                 </p>
-<pre><code>mkdir sierra
-cd sierra
-mkdir build_release
-mkdir install_release
-git clone https://github.com/sierra-lang/libsierra.git
-wget http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
-tar xf llvm-3.5.0.src.tar.xz
-mv llvm-3.5.0.src llvm
-cd llvm/tools
-git clone https://github.com/sierra-lang/sierra.git clang
-cd ../../build_release
-cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_release/
-make
-make install</code></pre>
 
                 <h3>Trying it out</h3>
                 <p>
@@ -126,37 +114,8 @@ make install</code></pre>
                     Otherwise the switch <code>-fsierra</code>, which turns on the sierra extension, won't be available.
                 </p>
                 <p>
-                    <em>Attention:</em> Our new algorithm for vectorization of short-circuit evaluation sometimes generates ill-formed LLVM code.
-                    This breaks some of the examples.
-                    We are working on that.
+                    You may also want to checkout our <a href=https://github.com/sierra-lang/sierra/wiki>wiki</a>.
                 </p>
-
-                <h3>Troubleshooting</h3>
-
-                <h4>Python 2</h4>
-                <p>
-                    LLVM's build scripts make use of python. 
-                    Apparently, python version 3 causes problems. 
-                    Thus, you have to stick to python 2. 
-                    If you don't want to mess around with your distribution too much, do something like this:
-                </p>
-<pre><code>cd ~
-mkdir bin
-ln -s /usr/bin/python2 ~/bin/python
-export PATH=~/bin:$PATH</code></pre>
-                <p>
-                    You can confirm with <code>pyhton --version</code> that python actually points to version 2.
-                    Eventually, you may want to put <code>export PATH=~/bin:$PATH</code> into your <code>~/.bashrc</code>.
-                </p>
-
-                <h4>Debugging clang</h4>
-                <p>
-                    Invoke <code>clang</code> with the <code>-cc1</code> switch in order to actually catch breakpoints. 
-                    This will just invoke the pure front end - no code generation. 
-                    Add <code>-emit-llvm</code> or <code>-emit-obj</code> to peek into later stages. 
-                    Use the <code>-v</code> switch to see full command-line arguments and paste them into your gdb-run command.
-                </p>
-
                 <h2 id="status">Status</h2>
 
                 <h3>Supported Control-Flow Constructs</h3>
@@ -217,7 +176,7 @@ export PATH=~/bin:$PATH</code></pre>
                             <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
                         </tr>
                         <tr>
-                            <td><code>expr && expr</code></td>
+                            <td><code>expr &amp;&amp; expr</code></td>
                             <td align="center"><a href="images/yes.png" target="_blank"><img src="images/yes.png" alt="check" title="Yes" style="max-width:100%;"></a></td>
                         </tr>
                         <tr>
@@ -267,11 +226,6 @@ export PATH=~/bin:$PATH</code></pre>
                         The semantic analysis which checks whether vector lengths match is currently disabled. 
                         There are problems with template instantiation.
                         Mixing vector lengths in an illegal way causes crashes.
-                    </li>
-                    <li>
-                        Our new algorithm for vectorization of short-circuit evaluation sometimes generates ill-formed LLVM code.
-                        This breaks some of the examples.
-                        We are working on that.
                     </li>
                     <li>
                         The attribute <code>spmd(L)</code> cannot depend on a template parameter <code>L</code>.
