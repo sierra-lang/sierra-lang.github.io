@@ -87,7 +87,7 @@ mv llvm-3.5.0.src llvm
 cd llvm/tools
 git clone https://github.com/sierra-lang/sierra.git clang
 cd ../../build_debug
-cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=${CUR}/sierra/install_debug/
+cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${CUR}/sierra/install_debug/
 make install -j4 # use appropriate number of threads here</code></pre>
                 <p>
                     Alternatively, you can use the cmake-gui tool: <code>cmake-gui ../llvm</code>
@@ -97,7 +97,6 @@ make install -j4 # use appropriate number of threads here</code></pre>
                     <li>press <code>configure</code></li>
                     <li>set <code>CMAKE_INSTALL_PREFIX</code> to <code>/path/to/sierra/install_debug</code></li>
                     <li>set <code>CMAKE_BUILD_TYPE</code> to <code>Debug</code></li>
-                    <li>set <code>BUILD_SHARED_LIBS</code> and</li>
                     <li>press <code>generate</code>.</li>
                 </ul>
 
