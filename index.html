@@ -76,6 +76,7 @@
                     For a <em>debug</em> build, we do the following:
                 </p>
 <pre><code>mkdir sierra
+export CUR=`pwd`
 cd sierra
 mkdir build_debug
 mkdir install_debug
@@ -86,10 +87,8 @@ mv llvm-3.5.0.src llvm
 cd llvm/tools
 git clone https://github.com/sierra-lang/sierra.git clang
 cd ../../build_debug
-cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=1 -DCMAKE_INSTALL_PREFIX=/path/to/sierra/install_debug/
-make
-make install</code></pre>
-
+cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${CUR}/sierra/install_debug/
+make install -j4 # use appropriate number of threads here</code></pre>
                 <p>
                     Alternatively, you can use the cmake-gui tool: <code>cmake-gui ../llvm</code>
                     Then,
@@ -98,7 +97,6 @@ make install</code></pre>
                     <li>press <code>configure</code></li>
                     <li>set <code>CMAKE_INSTALL_PREFIX</code> to <code>/path/to/sierra/install_debug</code></li>
                     <li>set <code>CMAKE_BUILD_TYPE</code> to <code>Debug</code></li>
-                    <li>set <code>BUILD_SHARED_LIBS</code> and</li>
                     <li>press <code>generate</code>.</li>
                 </ul>
 
@@ -242,7 +240,7 @@ make install</code></pre>
                 <p>
                     <em>Roland Leißa, Immanuel Haffner, and Sebastian Hack</em><br/>
                     <strong><a href="http://www.cdl.uni-saarland.de/papers/lhh14.pdf">Sierra: A SIMD Extension for C++.</a></strong><br/>
-                    In Proceedings of Proceedings of the Workshop on Programming models for SIMD/Vector processing (WPMVP), 2014.
+                    In Proceedings of the Workshop on Programming models for SIMD/Vector processing (WPMVP), 2014.
                 </p>
                 <p>
                     <em>Roland Leißa, Sebastian Hack, Ingo Wald, William R. Mark and Matt Pharr</em><br/>
