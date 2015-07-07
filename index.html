@@ -81,10 +81,9 @@ cd sierra
 mkdir build_debug
 mkdir install_debug
 git clone https://github.com/sierra-lang/libsierra.git
-wget http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
-tar xf llvm-3.5.0.src.tar.xz
-mv llvm-3.5.0.src llvm
+git clone https://github.com/llvm-mirror/llvm.git
 cd llvm/tools
+git checkout release_35
 git clone https://github.com/sierra-lang/sierra.git clang
 cd ../../build_debug
 cmake ../llvm -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${CUR}/sierra/install_debug/
